@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Compañeros — SpanishMentes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --c-violet-900: #2E1065; --c-violet-700: #5B21B6; --c-violet-600: #6D28D9;
+    --c-violet-500: #7C3AED; --c-violet-400: #8B5CF6; --c-violet-300: #A78BFA;
+    --c-violet-100: #EDE9FE; --c-violet-50: #F5F3FF;
+    --c-pink-500: #EC4899; --c-pink-400: #F472B6; --c-pink-100: #FCE7F3;
+    --c-cyan-500: #06B6D4; --c-cyan-400: #22D3EE; --c-cyan-100: #CFFAFE;
+    --c-amber-500: #F59E0B; --c-amber-100: #FEF3C7;
+    --c-green-500: #10B981; --c-green-100: #D1FAE5;
+    --c-ink-900: #0F0A1E; --c-ink-700: #2D2542; --c-ink-500: #5B5470;
+    --c-ink-300: #A8A2BC; --c-ink-100: #E9E5F2;
+    --c-white: #FFFFFF; --c-cream: #FAF8FF;
+    --grad-hero: linear-gradient(135deg, #6D28D9 0%, #7C3AED 35%, #A855F7 70%, #EC4899 100%);
+    --grad-cta: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+    --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --font-body: 'Manrope', system-ui, sans-serif;
+    --r-md: 0.875rem; --r-lg: 1.25rem; --r-xl: 1.75rem; --r-pill: 9999px;
+    --shadow-md: 0 4px 12px rgba(91, 33, 182, 0.08), 0 2px 4px rgba(15, 10, 30, 0.04);
+    --shadow-lg: 0 12px 32px rgba(91, 33, 182, 0.12), 0 4px 8px rgba(15, 10, 30, 0.06);
+    --shadow-xl: 0 24px 64px rgba(91, 33, 182, 0.18), 0 8px 16px rgba(15, 10, 30, 0.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body); color: var(--c-ink-700);
+    background: linear-gradient(180deg, #F5F3FF 0%, #FAF8FF 100%);
+    min-height: 100vh; -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); color: var(--c-ink-900); letter-spacing: -0.02em; font-weight: 700; line-height: 1.2; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  /* Layout */
+  .app {
+    max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 6rem;
+  }
+  .mode-tabs {
+    display: flex; gap: 4px; background: var(--c-violet-100);
+    padding: 4px; border-radius: var(--r-pill); margin: 0 auto 2rem;
+    max-width: 320px;
+  }
+  .mode-tab {
+    flex: 1; padding: 10px 16px; border-radius: var(--r-pill);
+    font-size: 0.875rem; font-weight: 600; color: var(--c-ink-500);
+    transition: all 200ms;
+  }
+  .mode-tab.active {
+    background: white; color: var(--c-violet-700);
+    box-shadow: 0 2px 6px rgba(91, 33, 182, 0.12);
+  }
+
+  /* Brand header */
+  .brand {
+    text-align: center; margin-bottom: 2rem;
+  }
+  .brand-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--c-violet-100); color: var(--c-violet-600);
+    padding: 6px 14px; border-radius: var(--r-pill);
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .brand-pill .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--c-pink-500);
+  }
+  .brand h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+  }
+  .brand h1 .accent {
+    background: var(--grad-cta);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-style: italic; padding: 0 0.1em 0.05em; margin: 0 -0.05em -0.05em;
+    display: inline-block;
+  }
+  .brand p {
+    color: var(--c-ink-500); margin-top: 0.75rem; max-width: 48ch;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* Card */
+  .card {
+    background: white; border-radius: var(--r-xl);
+    padding: 2rem 1.5rem; box-shadow: var(--shadow-lg);
+    border: 1px solid var(--c-ink-100);
+  }
+  @media (min-width: 600px) {
+    .card { padding: 2.5rem; }
+  }
+
+  /* Progress */
+  .progress {
+    display: flex; gap: 6px; margin-bottom: 2rem;
+  }
+  .progress-step {
+    flex: 1; height: 6px; background: var(--c-ink-100);
+    border-radius: var(--r-pill); transition: background 300ms;
+  }
+  .progress-step.done { background: var(--grad-cta); }
+
+  /* Form steps */
+  .step { display: none; }
+  .step.active { display: block; animation: fadeIn 300ms ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .step h2 {
+    font-size: 1.5rem; margin-bottom: 0.5rem;
+  }
+  .step .sub {
+    color: var(--c-ink-500); font-size: 0.9375rem; margin-bottom: 1.5rem;
+  }
+  .step-icon {
+    width: 56px; height: 56px; border-radius: var(--r-lg);
+    background: var(--grad-cta); color: white;
+    display: grid; place-items: center; margin-bottom: 1.25rem;
+    font-size: 1.75rem;
+  }
+
+  /* Form fields */
+  .field { margin-bottom: 1.25rem; }
+  .field label {
+    display: block; font-size: 0.875rem; font-weight: 600;
+    color: var(--c-ink-900); margin-bottom: 0.5rem;
+  }
+  .field .hint {
+    font-size: 0.8125rem; color: var(--c-ink-500); margin-top: 4px;
+  }
+  .field input[type="text"],
+  .field input[type="email"],
+  .field textarea,
+  .field select {
+    width: 100%; padding: 12px 14px; border-radius: var(--r-md);
+    border: 1.5px solid var(--c-ink-100); background: var(--c-cream);
+    font: inherit; color: var(--c-ink-900);
+    transition: border-color 200ms, background 200ms;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: none; border-color: var(--c-violet-500); background: white;
+  }
+  .field textarea { resize: vertical; min-height: 100px; }
+
+  /* Chip selectors */
+  .chips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .chip {
+    padding: 10px 16px; border-radius: var(--r-pill);
+    background: var(--c-cream); border: 1.5px solid var(--c-ink-100);
+    font-size: 0.875rem; font-weight: 500; color: var(--c-ink-700);
+    transition: all 200ms;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chip:hover { border-color: var(--c-violet-300); }
+  .chip.selected {
+    background: var(--grad-cta); color: white; border-color: transparent;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  }
+  .chip .check { display: none; }
+  .chip.selected .check { display: inline; }
+
+  /* Radio cards */
+  .radio-grid {
+    display: grid; grid-template-columns: 1fr; gap: 10px;
+  }
+  @media (min-width: 480px) {
+    .radio-grid.two-col { grid-template-columns: 1fr 1fr; }
+  }
+  .radio-card {
+    padding: 14px 16px; border-radius: var(--r-md);
+    background: var(--c-cream); border: 2px solid var(--c-ink-100);
+    text-align: left; transition: all 200ms;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .radio-card:hover { border-color: var(--c-violet-300); }
+  .radio-card.selected {
+    border-color: var(--c-violet-500); background: var(--c-violet-50);
+  }
+  .radio-card .emoji { font-size: 1.5rem; flex-shrink: 0; }
+  .radio-card .text {
+    flex: 1;
+  }
+  .radio-card .text strong {
+    display: block; color: var(--c-ink-900);
+    font-size: 0.9375rem; font-weight: 600;
+  }
+  .radio-card .text span {
+    display: block; font-size: 0.8125rem; color: var(--c-ink-500);
+    margin-top: 2px;
+  }
+
+  /* Buttons */
+  .nav-buttons {
+    display: flex; gap: 12px; margin-top: 2rem;
+  }
+  .btn {
+    padding: 14px 24px; border-radius: var(--r-pill);
+    font-weight: 600; font-size: 0.9375rem;
+    transition: all 200ms;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-primary {
+    background: var(--grad-cta); color: white;
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.28);
+    flex: 1;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(124, 58, 237, 0.36); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+  .btn-ghost {
+    background: transparent; color: var(--c-ink-700);
+    border: 1.5px solid var(--c-ink-100);
+  }
+  .btn-ghost:hover { border-color: var(--c-violet-300); color: var(--c-violet-600); }
+  .btn-sm { padding: 8px 14px; font-size: 0.8125rem; }
+
+  /* Success screen */
+  .success {
+    text-align: center; padding: 2rem 1rem;
+  }
+  .success-emoji {
+    font-size: 4rem; margin-bottom: 1rem;
+    display: inline-block; animation: bounce 600ms ease;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-8px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(-4px); }
+  }
+  .success h2 {
+    font-size: 1.75rem; margin-bottom: 0.75rem;
+  }
+  .success p {
+    color: var(--c-ink-500); margin-bottom: 1.5rem;
+  }
+
+  /* ============ ADMIN VIEW ============ */
+  .admin-header {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    justify-content: space-between; align-items: end;
+    margin-bottom: 1.5rem;
+  }
+  .admin-header h2 { font-size: 1.5rem; }
+  .admin-actions {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .stat {
+    background: white; border-radius: var(--r-md);
+    padding: 1rem; border: 1px solid var(--c-ink-100);
+    text-align: center;
+  }
+  .stat .num {
+    font-family: var(--font-display); font-size: 1.75rem;
+    font-weight: 800; background: var(--grad-cta);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .stat .label {
+    font-size: 0.75rem; color: var(--c-ink-500);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-top: 2px; font-weight: 600;
+  }
+
+  .profile-card {
+    background: white; border-radius: var(--r-lg);
+    padding: 1.25rem; border: 1px solid var(--c-ink-100);
+    box-shadow: var(--shadow-md); margin-bottom: 1rem;
+    transition: box-shadow 200ms;
+  }
+  .profile-card:hover { box-shadow: var(--shadow-lg); }
+  .profile-head {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem;
+  }
+  .profile-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--grad-cta); color: white;
+    display: grid; place-items: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .profile-name {
+    font-family: var(--font-display); font-weight: 700;
+    color: var(--c-ink-900); font-size: 1.0625rem;
+  }
+  .profile-meta {
+    font-size: 0.8125rem; color: var(--c-ink-500); margin-top: 2px;
+  }
+  .profile-bio {
+    font-size: 0.875rem; color: var(--c-ink-700);
+    background: var(--c-cream); padding: 10px 12px;
+    border-radius: var(--r-md); margin-bottom: 0.75rem;
+    border-left: 3px solid var(--c-violet-400);
+    font-style: italic;
+  }
+  .profile-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .tag {
+    padding: 4px 10px; border-radius: var(--r-pill);
+    font-size: 0.75rem; font-weight: 600;
+    background: var(--c-violet-100); color: var(--c-violet-700);
+  }
+  .tag.interest { background: var(--c-pink-100); color: var(--c-pink-500); }
+  .tag.level { background: var(--c-cyan-100); color: var(--c-cyan-500); }
+  .tag.time { background: var(--c-amber-100); color: var(--c-amber-500); }
+
+  .match-section {
+    margin-top: 0.75rem; padding-top: 0.75rem;
+    border-top: 1px solid var(--c-ink-100);
+  }
+  .match-toggle {
+    width: 100%; text-align: left; font-size: 0.8125rem;
+    color: var(--c-violet-600); font-weight: 600;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .match-list {
+    margin-top: 0.75rem; display: none;
+  }
+  .match-list.open { display: block; }
+  .match-item {
+    padding: 10px 12px; background: var(--c-cream);
+    border-radius: var(--r-md); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.875rem;
+  }
+  .match-score {
+    font-weight: 700; font-family: var(--font-display);
+    padding: 4px 10px; border-radius: var(--r-pill);
+    font-size: 0.8125rem; flex-shrink: 0;
+  }
+  .match-score.excellent { background: var(--c-green-100); color: var(--c-green-500); }
+  .match-score.good { background: var(--c-amber-100); color: var(--c-amber-500); }
+  .match-score.weak { background: var(--c-ink-100); color: var(--c-ink-500); }
+  .match-with {
+    flex: 1; color: var(--c-ink-900); font-weight: 500;
+  }
+  .match-reason {
+    font-size: 0.75rem; color: var(--c-ink-500); margin-top: 2px;
+    display: block;
+  }
+
+  .empty-state {
+    text-align: center; padding: 3rem 1rem; color: var(--c-ink-500);
+  }
+  .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
+
+  .delete-btn {
+    color: var(--c-ink-300); font-size: 0.75rem;
+    margin-left: auto; padding: 4px 8px; border-radius: var(--r-pill);
+  }
+  .delete-btn:hover { color: var(--c-pink-500); background: var(--c-pink-100); }
+
+  /* Loading */
+  .loading {
+    text-align: center; padding: 3rem 1rem; color: var(--c-ink-500);
+  }
+  .spinner {
+    display: inline-block; width: 32px; height: 32px;
+    border: 3px solid var(--c-violet-100);
+    border-top-color: var(--c-violet-500);
+    border-radius: 50%; animation: spin 600ms linear infinite;
+    margin-bottom: 1rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Tabs: Onboarding | Admin -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" data-mode="form">Cadastrar</button>
+    <button class="mode-tab" data-mode="admin">Admin</button>
+  </div>
+
+  <!-- ============= FORM VIEW ============= -->
+  <div id="form-view">
+    <div class="brand">
+      <div class="brand-pill"><span class="dot"></span>Comunidad SpanishMentes</div>
+      <h1>Encontra tu <span class="accent">compañero</span> de práctica</h1>
+      <p>Cuéntanos un poco sobre ti y te conectamos con otros estudiantes que comparten tus intereses, horarios y objetivos.</p>
+    </div>
+
+    <div class="card">
+      <div class="progress" id="progress"></div>
+
+      <!-- STEP 1: Identity -->
+      <div class="step active" data-step="0">
+        <div class="step-icon">👋</div>
+        <h2>Empecemos por lo básico</h2>
+        <p class="sub">Solo Jenny e Javier vão ver seus dados. Nada é público sem sua permissão.</p>
+
+        <div class="field">
+          <label for="name">Como você quer ser chamado(a)?</label>
+          <input type="text" id="name" placeholder="Ex: Maria, João, Mari..." maxlength="40" />
+        </div>
+
+        <div class="field">
+          <label for="email">Seu email</label>
+          <input type="email" id="email" placeholder="seu@email.com" />
+          <div class="hint">Para te avisarmos quando aparecer um match.</div>
+        </div>
+
+        <div class="field">
+          <label>Seu nível de espanhol</label>
+          <div class="radio-grid">
+            <button type="button" class="radio-card" data-field="level" data-value="iniciante">
+              <span class="emoji">🌱</span>
+              <span class="text">
+                <strong>Iniciante</strong>
+                <span>"Hola, ¿cómo estás?" — e pouco mais por enquanto</span>
+              </span>
+            </button>
+            <button type="button" class="radio-card" data-field="level" data-value="intermediario">
+              <span class="emoji">🌿</span>
+              <span class="text">
+                <strong>Intermediário</strong>
+                <span>Consigo conversar com erros, entendo a maioria das coisas</span>
+              </span>
+            </button>
+            <button type="button" class="radio-card" data-field="level" data-value="avancado">
+              <span class="emoji">🌳</span>
+              <span class="text">
+                <strong>Avançado</strong>
+                <span>Falo bem, quero refinar fluência e vocabulário</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Motivation -->
+      <div class="step" data-step="1">
+        <div class="step-icon">🎯</div>
+        <h2>Por que você aprende espanhol?</h2>
+        <p class="sub">Escolha a motivação que mais te define hoje. Vamos te conectar com gente no mesmo caminho.</p>
+
+        <div class="field">
+          <div class="radio-grid two-col">
+            <button type="button" class="radio-card" data-field="motivation" data-value="trabalho">
+              <span class="emoji">💼</span>
+              <span class="text"><strong>Trabalho</strong><span>Carreira, reuniões, oportunidades globais</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="viagem">
+              <span class="emoji">✈️</span>
+              <span class="text"><strong>Viagem</strong><span>Espanha, América Latina, mochilão</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="imigracao">
+              <span class="emoji">🏠</span>
+              <span class="text"><strong>Imigração</strong><span>Pretendo morar fora ou já moro</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="familia">
+              <span class="emoji">❤️</span>
+              <span class="text"><strong>Família/Relacionamento</strong><span>Pessoas próximas falam espanhol</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="cultura">
+              <span class="emoji">🎬</span>
+              <span class="text"><strong>Cultura</strong><span>Filmes, música, séries, literatura</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="academico">
+              <span class="emoji">🎓</span>
+              <span class="text"><strong>Acadêmico</strong><span>Estudos, pesquisa, certificações</span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Interests -->
+      <div class="step" data-step="2">
+        <div class="step-icon">💬</div>
+        <h2>Sobre o que você adora conversar?</h2>
+        <p class="sub">Escolha 3 a 6 temas. Quanto mais específico, melhor o match.</p>
+
+        <div class="field">
+          <div class="chips" id="interests-chips">
+            <!-- Populated by JS -->
+          </div>
+          <div class="hint" id="interests-counter">0 selecionados (mínimo 3)</div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Vibe + Availability -->
+      <div class="step" data-step="3">
+        <div class="step-icon">⏰</div>
+        <h2>Quando e como rola melhor?</h2>
+        <p class="sub">Horário compatível é metade do match. A outra metade é a vibe.</p>
+
+        <div class="field">
+          <label>Disponibilidade (escolha quantos quiser)</label>
+          <div class="chips" id="time-chips">
+            <button type="button" class="chip" data-time="manha-semana">🌅 Manhãs de semana</button>
+            <button type="button" class="chip" data-time="tarde-semana">☀️ Tardes de semana</button>
+            <button type="button" class="chip" data-time="noite-semana">🌙 Noites de semana</button>
+            <button type="button" class="chip" data-time="manha-fim">🌅 Manhãs no fim de semana</button>
+            <button type="button" class="chip" data-time="tarde-fim">☀️ Tardes no fim de semana</button>
+            <button type="button" class="chip" data-time="noite-fim">🌙 Noites no fim de semana</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Que tipo de encontro você quer?</label>
+          <div class="radio-grid">
+            <button type="button" class="radio-card" data-field="vibe" data-value="prática">
+              <span class="emoji">🎯</span>
+              <span class="text"><strong>Só prática mesmo</strong><span>Quero treinar espanhol, sem precisar virar amizade</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="vibe" data-value="amizade">
+              <span class="emoji">🤝</span>
+              <span class="text"><strong>Prática + amizade</strong><span>Quero conhecer gente legal e praticar junto</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="vibe" data-value="flexivel">
+              <span class="emoji">🌈</span>
+              <span class="text"><strong>Tô de boa</strong><span>Depende da química, tô aberto(a)</span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: Bio -->
+      <div class="step" data-step="4">
+        <div class="step-icon">✍️</div>
+        <h2>Te conta um pouco mais?</h2>
+        <p class="sub">Em 2-4 frases: quem você é, o que faz, e o que te empolga. Pode escrever em português mesmo.</p>
+
+        <div class="field">
+          <textarea id="bio" placeholder="Ex: Sou designer, moro em Floripa, viajo muito pela América do Sul. Adoro conversar sobre filmes, viagens e startups. Tô estudando espanhol pra mochilão na Patagônia ano que vem." maxlength="400"></textarea>
+          <div class="hint"><span id="bio-counter">0</span>/400 caracteres</div>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="step" data-step="5">
+        <div class="success">
+          <div class="success-emoji">🎉</div>
+          <h2>¡Listo, <span id="success-name">compañero</span>!</h2>
+          <p>Seu perfil foi salvo. Em até <strong>7 dias</strong>, Jenny ou Javier vão te mandar sugestões de match pelo WhatsApp com 3 icebreakers prontos pra você quebrar o gelo em espanhol.</p>
+          <button class="btn btn-primary" onclick="restartForm()">Cadastrar outro perfil</button>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <div class="nav-buttons" id="nav-buttons">
+        <button class="btn btn-ghost" id="btn-back" style="display:none;">← Voltar</button>
+        <button class="btn btn-primary" id="btn-next" disabled>Continuar →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============= ADMIN VIEW ============= -->
+  <div id="admin-view" style="display:none;">
+    <div class="brand">
+      <div class="brand-pill"><span class="dot"></span>Painel Admin</div>
+      <h1>Compañeros — <span class="accent">matches</span></h1>
+      <p>Veja todos os perfis cadastrados e os scores de matching cruzados. Use para fazer matching manual com confiança.</p>
+    </div>
+
+    <div class="card">
+      <div class="admin-header">
+        <div>
+          <h2>Perfis cadastrados</h2>
+          <p style="font-size: 0.875rem; color: var(--c-ink-500); margin-top:4px;">Ordenado por mais recente. Clique em "Ver matches" para sugestões.</p>
+        </div>
+        <div class="admin-actions">
+          <button class="btn btn-ghost btn-sm" onclick="exportCSV()">⬇ Exportar CSV</button>
+          <button class="btn btn-ghost btn-sm" onclick="exportJSON()">⬇ Exportar JSON</button>
+        </div>
+      </div>
+
+      <div class="stats" id="stats"></div>
+
+      <div id="profiles-list">
+        <div class="loading">
+          <div class="spinner"></div>
+          <div>Carregando perfis...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // CONFIG
+  // ============================================================
+  // ⚠️ COLE AQUI A URL DO SEU GOOGLE APPS SCRIPT WEB APP
+  // Ex: 'https://script.google.com/macros/s/AKfycbxxxxxxxxx/exec'
+  // Se deixar vazio, o sistema funciona só com storage local (modo demo).
+  const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyufvoLdSYmb17VnZfv8_j4EO2LcU2ErSM_uxZK9mI2OZXzV-m7KChso80juyHQClLC/exec';
+
+  // ============================================================
+  // CONFIG: Interests catalog
+  // ============================================================
+  const INTERESTS = [
+    { id: 'cinema', label: '🎬 Cinema & séries' },
+    { id: 'musica', label: '🎵 Música' },
+    { id: 'literatura', label: '📚 Literatura & livros' },
+    { id: 'viagens', label: '✈️ Viagens' },
+    { id: 'gastronomia', label: '🍝 Gastronomia' },
+    { id: 'esportes', label: '⚽ Esportes' },
+    { id: 'tecnologia', label: '💻 Tecnologia' },
+    { id: 'empreendedorismo', label: '🚀 Empreendedorismo' },
+    { id: 'politica', label: '🗞️ Política & atualidades' },
+    { id: 'arte', label: '🎨 Arte & design' },
+    { id: 'ciencia', label: '🔬 Ciência' },
+    { id: 'espiritualidade', label: '🧘 Espiritualidade' },
+    { id: 'natureza', label: '🌿 Natureza & outdoors' },
+    { id: 'fitness', label: '💪 Fitness & bem-estar' },
+    { id: 'games', label: '🎮 Games' },
+    { id: 'fotografia', label: '📷 Fotografia' }
+  ];
+
+  const TOTAL_STEPS = 5; // 0-4 are form steps, 5 is success
+  let currentStep = 0;
+  let formData = {
+    name: '', email: '', level: '', motivation: '',
+    interests: [], times: [], vibe: '', bio: ''
+  };
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  function init() {
+    renderProgress();
+    renderInterests();
+    bindEvents();
+    bindModeTabs();
+  }
+
+  function bindModeTabs() {
+    document.querySelectorAll('.mode-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const mode = tab.dataset.mode;
+        document.getElementById('form-view').style.display = mode === 'form' ? 'block' : 'none';
+        document.getElementById('admin-view').style.display = mode === 'admin' ? 'block' : 'none';
+        if (mode === 'admin') loadAdminView();
+      });
+    });
+  }
+
+  function renderProgress() {
+    const wrap = document.getElementById('progress');
+    wrap.innerHTML = '';
+    for (let i = 0; i < TOTAL_STEPS; i++) {
+      const div = document.createElement('div');
+      div.className = 'progress-step' + (i <= currentStep ? ' done' : '');
+      wrap.appendChild(div);
+    }
+  }
+
+  function renderInterests() {
+    const wrap = document.getElementById('interests-chips');
+    wrap.innerHTML = '';
+    INTERESTS.forEach(int => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'chip';
+      btn.dataset.interest = int.id;
+      btn.innerHTML = `<span>${int.label}</span><span class="check">✓</span>`;
+      btn.addEventListener('click', () => toggleInterest(int.id, btn));
+      wrap.appendChild(btn);
+    });
+  }
+
+  function toggleInterest(id, btn) {
+    const idx = formData.interests.indexOf(id);
+    if (idx > -1) {
+      formData.interests.splice(idx, 1);
+      btn.classList.remove('selected');
+    } else {
+      if (formData.interests.length >= 6) return; // max 6
+      formData.interests.push(id);
+      btn.classList.add('selected');
+    }
+    document.getElementById('interests-counter').textContent =
+      `${formData.interests.length} selecionados (mínimo 3, máximo 6)`;
+    updateNextButton();
+  }
+
+  function bindEvents() {
+    // Text inputs
+    document.getElementById('name').addEventListener('input', e => {
+      formData.name = e.target.value.trim();
+      updateNextButton();
+    });
+    document.getElementById('email').addEventListener('input', e => {
+      formData.email = e.target.value.trim();
+      updateNextButton();
+    });
+    document.getElementById('bio').addEventListener('input', e => {
+      formData.bio = e.target.value.trim();
+      document.getElementById('bio-counter').textContent = formData.bio.length;
+      updateNextButton();
+    });
+
+    // Radio cards
+    document.querySelectorAll('.radio-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const field = card.dataset.field;
+        const value = card.dataset.value;
+        // Deselect siblings
+        document.querySelectorAll(`.radio-card[data-field="${field}"]`).forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        formData[field] = value;
+        updateNextButton();
+      });
+    });
+
+    // Time chips (multi-select)
+    document.querySelectorAll('[data-time]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const time = chip.dataset.time;
+        const idx = formData.times.indexOf(time);
+        if (idx > -1) {
+          formData.times.splice(idx, 1);
+          chip.classList.remove('selected');
+        } else {
+          formData.times.push(time);
+          chip.classList.add('selected');
+        }
+        updateNextButton();
+      });
+    });
+
+    // Nav buttons
+    document.getElementById('btn-next').addEventListener('click', nextStep);
+    document.getElementById('btn-back').addEventListener('click', prevStep);
+  }
+
+  function updateNextButton() {
+    const btn = document.getElementById('btn-next');
+    let valid = false;
+    switch (currentStep) {
+      case 0:
+        valid = formData.name.length >= 2 && /\S+@\S+\.\S+/.test(formData.email) && formData.level;
+        break;
+      case 1:
+        valid = !!formData.motivation;
+        break;
+      case 2:
+        valid = formData.interests.length >= 3;
+        break;
+      case 3:
+        valid = formData.times.length >= 1 && !!formData.vibe;
+        break;
+      case 4:
+        valid = formData.bio.length >= 20;
+        break;
+    }
+    btn.disabled = !valid;
+    btn.textContent = currentStep === 4 ? 'Salvar perfil ✓' : 'Continuar →';
+  }
+
+  function nextStep() {
+    if (currentStep === 4) {
+      // Final submit
+      saveProfile();
+      return;
+    }
+    currentStep++;
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+    document.getElementById('btn-back').style.display = currentStep > 0 ? 'inline-flex' : 'none';
+    renderProgress();
+    updateNextButton();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function prevStep() {
+    if (currentStep === 0) return;
+    currentStep--;
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+    document.getElementById('btn-back').style.display = currentStep > 0 ? 'inline-flex' : 'none';
+    renderProgress();
+    updateNextButton();
+  }
+
+  async function saveProfile() {
+    const btn = document.getElementById('btn-next');
+    btn.disabled = true;
+    btn.textContent = 'Salvando...';
+
+    const profile = {
+      ...formData,
+      id: 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+      createdAt: new Date().toISOString()
+    };
+
+    let savedSomewhere = false;
+
+    // 1. Tenta salvar no Google Sheets (se configurado)
+    if (SHEETS_ENDPOINT && SHEETS_ENDPOINT.startsWith('https://')) {
+      try {
+        // 'text/plain' content-type evita o CORS preflight do navegador.
+        // Apps Script aceita JSON no body mesmo com text/plain.
+        // 'no-cors' faz o navegador não bloquear a resposta opaca.
+        await fetch(SHEETS_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(profile)
+        });
+        savedSomewhere = true;
+      } catch (err) {
+        console.warn('Não conseguiu enviar para Sheets:', err);
+      }
+    }
+
+    // 2. Tenta salvar localmente também (admin view depende disso)
+    // window.storage só existe quando rodando dentro do Claude.ai —
+    // em produção (WordPress/Elementor) ele simplesmente não existe e tá ok.
+    try {
+      if (window.storage && typeof window.storage.set === 'function') {
+        const key = `profile:${profile.id}`;
+        await window.storage.set(key, JSON.stringify(profile), true);
+        savedSomewhere = true;
+      }
+    } catch (err) {
+      console.warn('Storage local não disponível:', err);
+    }
+
+    if (!savedSomewhere) {
+      alert('Atenção: nenhum destino de salvamento configurado. Configure SHEETS_ENDPOINT no código antes de publicar.');
+      btn.disabled = false;
+      btn.textContent = 'Salvar perfil ✓';
+      return;
+    }
+
+    // Show success step
+    document.getElementById('success-name').textContent = formData.name.split(' ')[0];
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector('[data-step="5"]').classList.add('active');
+    document.getElementById('nav-buttons').style.display = 'none';
+  }
+
+  function restartForm() {
+    formData = { name: '', email: '', level: '', motivation: '', interests: [], times: [], vibe: '', bio: '' };
+    currentStep = 0;
+    document.querySelectorAll('.radio-card.selected, .chip.selected').forEach(el => el.classList.remove('selected'));
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('bio').value = '';
+    document.getElementById('bio-counter').textContent = '0';
+    document.getElementById('interests-counter').textContent = '0 selecionados (mínimo 3, máximo 6)';
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector('[data-step="0"]').classList.add('active');
+    document.getElementById('nav-buttons').style.display = 'flex';
+    document.getElementById('btn-back').style.display = 'none';
+    renderProgress();
+    updateNextButton();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ============================================================
+  // ADMIN VIEW + MATCHING ALGORITHM
+  // ============================================================
+  let allProfiles = [];
+
+  async function loadAdminView() {
+    const list = document.getElementById('profiles-list');
+    list.innerHTML = '<div class="loading"><div class="spinner"></div><div>Carregando perfis...</div></div>';
+
+    try {
+      const keysResult = await window.storage.list('profile:', true);
+      const keys = (keysResult && keysResult.keys) || [];
+
+      allProfiles = [];
+      for (const key of keys) {
+        try {
+          const r = await window.storage.get(key, true);
+          if (r && r.value) {
+            allProfiles.push(JSON.parse(r.value));
+          }
+        } catch (e) { /* skip */ }
+      }
+
+      // Sort by most recent
+      allProfiles.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+
+      renderStats();
+      renderProfiles();
+    } catch (e) {
+      list.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><div>Erro ao carregar. Tente recarregar a página.</div></div>';
+      console.error(e);
+    }
+  }
+
+  function renderStats() {
+    const wrap = document.getElementById('stats');
+    const levels = { iniciante: 0, intermediario: 0, avancado: 0 };
+    allProfiles.forEach(p => { if (levels[p.level] !== undefined) levels[p.level]++; });
+
+    // Count excellent matches across all pairs
+    let excellentMatches = 0;
+    for (let i = 0; i < allProfiles.length; i++) {
+      for (let j = i + 1; j < allProfiles.length; j++) {
+        const { score } = computeMatch(allProfiles[i], allProfiles[j]);
+        if (score >= 11) excellentMatches++;
+      }
+    }
+
+    wrap.innerHTML = `
+      <div class="stat">
+        <div class="num">${allProfiles.length}</div>
+        <div class="label">Perfis</div>
+      </div>
+      <div class="stat">
+        <div class="num">${excellentMatches}</div>
+        <div class="label">Matches top</div>
+      </div>
+      <div class="stat">
+        <div class="num">${levels.iniciante}/${levels.intermediario}/${levels.avancado}</div>
+        <div class="label">Ini/Int/Avç</div>
+      </div>
+    `;
+  }
+
+  function renderProfiles() {
+    const list = document.getElementById('profiles-list');
+    if (allProfiles.length === 0) {
+      list.innerHTML = '<div class="empty-state"><div class="icon">📭</div><div>Nenhum perfil ainda. Cadastre o primeiro na aba "Cadastrar".</div></div>';
+      return;
+    }
+
+    list.innerHTML = '';
+    allProfiles.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'profile-card';
+
+      const initials = p.name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+      const interestLabels = p.interests.map(id => {
+        const found = INTERESTS.find(i => i.id === id);
+        return found ? found.label : id;
+      });
+
+      // Compute matches for this profile
+      const matches = allProfiles
+        .filter(other => other.id !== p.id)
+        .map(other => ({ profile: other, ...computeMatch(p, other) }))
+        .sort((a, b) => b.score - a.score);
+
+      const topMatches = matches.slice(0, 5);
+
+      card.innerHTML = `
+        <div class="profile-head">
+          <div class="profile-avatar">${initials}</div>
+          <div style="flex:1;">
+            <div class="profile-name">${escapeHtml(p.name)}</div>
+            <div class="profile-meta">${escapeHtml(p.email)} · ${new Date(p.createdAt).toLocaleDateString('pt-BR')}</div>
+          </div>
+          <button class="delete-btn" onclick="deleteProfile('${p.id}')" title="Excluir">✕</button>
+        </div>
+        <div class="profile-bio">"${escapeHtml(p.bio)}"</div>
+        <div class="profile-tags">
+          <span class="tag level">${labelLevel(p.level)}</span>
+          <span class="tag">${labelMotivation(p.motivation)}</span>
+          <span class="tag">${labelVibe(p.vibe)}</span>
+          ${p.times.map(t => `<span class="tag time">${labelTime(t)}</span>`).join('')}
+          ${interestLabels.map(l => `<span class="tag interest">${l}</span>`).join('')}
+        </div>
+        <div class="match-section">
+          <button class="match-toggle" onclick="toggleMatches(this)">
+            <span>🎯 Ver matches sugeridos (${matches.filter(m => m.score >= 7).length} compatíveis)</span>
+            <span>▾</span>
+          </button>
+          <div class="match-list">
+            ${topMatches.length === 0
+              ? '<div style="font-size:0.875rem; color: var(--c-ink-500); padding: 0.5rem;">Sem outros perfis para comparar ainda.</div>'
+              : topMatches.map(m => {
+                  const cls = m.score >= 11 ? 'excellent' : m.score >= 7 ? 'good' : 'weak';
+                  const label = m.score >= 11 ? 'TOP' : m.score >= 7 ? 'OK' : 'fraco';
+                  return `
+                    <div class="match-item">
+                      <span class="match-score ${cls}">${m.score} · ${label}</span>
+                      <span class="match-with">
+                        ${escapeHtml(m.profile.name)}
+                        <span class="match-reason">${m.reasons.join(' · ')}</span>
+                      </span>
+                    </div>
+                  `;
+                }).join('')
+            }
+          </div>
+        </div>
+      `;
+      list.appendChild(card);
+    });
+  }
+
+  // Toggle match list
+  window.toggleMatches = function(btn) {
+    const list = btn.parentElement.querySelector('.match-list');
+    list.classList.toggle('open');
+    btn.querySelector('span:last-child').textContent = list.classList.contains('open') ? '▴' : '▾';
+  };
+
+  // ============================================================
+  // MATCHING ALGORITHM (the heart of "Compañeros")
+  // ============================================================
+  function computeMatch(a, b) {
+    let score = 0;
+    const reasons = [];
+
+    // 1. NIVEL (peso 3) — non-negotiable
+    if (a.level === b.level) {
+      score += 3;
+      reasons.push('mesmo nível');
+    }
+
+    // 2. DISPONIBILIDADE (peso 3) — non-negotiable
+    const sharedTimes = a.times.filter(t => b.times.includes(t));
+    if (sharedTimes.length >= 2) {
+      score += 3;
+      reasons.push(`${sharedTimes.length} horários em comum`);
+    } else if (sharedTimes.length === 1) {
+      score += 2;
+      reasons.push('1 horário em comum');
+    }
+
+    // 3. MOTIVAÇÃO (peso 2)
+    if (a.motivation === b.motivation) {
+      score += 2;
+      reasons.push('mesma motivação');
+    }
+
+    // 4. INTERESSES (peso 2 se 2+ em comum)
+    const sharedInterests = a.interests.filter(i => b.interests.includes(i));
+    if (sharedInterests.length >= 3) {
+      score += 2;
+      reasons.push(`${sharedInterests.length} interesses em comum`);
+    } else if (sharedInterests.length === 2) {
+      score += 1;
+      reasons.push('2 interesses em comum');
+    }
+
+    // 5. VIBE (peso 1)
+    if (a.vibe === b.vibe || a.vibe === 'flexivel' || b.vibe === 'flexivel') {
+      score += 1;
+      reasons.push('vibe compatível');
+    }
+
+    return { score, reasons };
+  }
+
+  // ============================================================
+  // UTILS
+  // ============================================================
+  function labelLevel(l) {
+    return { iniciante: '🌱 Iniciante', intermediario: '🌿 Intermediário', avancado: '🌳 Avançado' }[l] || l;
+  }
+  function labelMotivation(m) {
+    return {
+      trabalho: '💼 Trabalho', viagem: '✈️ Viagem', imigracao: '🏠 Imigração',
+      familia: '❤️ Família', cultura: '🎬 Cultura', academico: '🎓 Acadêmico'
+    }[m] || m;
+  }
+  function labelVibe(v) {
+    return { 'prática': '🎯 Só prática', amizade: '🤝 Prática+amizade', flexivel: '🌈 Flexível' }[v] || v;
+  }
+  function labelTime(t) {
+    return {
+      'manha-semana': '🌅 Man. semana', 'tarde-semana': '☀️ Tar. semana', 'noite-semana': '🌙 Noi. semana',
+      'manha-fim': '🌅 Man. fim', 'tarde-fim': '☀️ Tar. fim', 'noite-fim': '🌙 Noi. fim'
+    }[t] || t;
+  }
+  function escapeHtml(s) {
+    if (!s) return '';
+    return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+  }
+
+  async function deleteProfile(id) {
+    if (!confirm('Tem certeza? Esta ação não pode ser desfeita.')) return;
+    try {
+      await window.storage.delete(`profile:${id}`, true);
+      await loadAdminView();
+    } catch (e) {
+      alert('Erro ao excluir.');
+    }
+  }
+  window.deleteProfile = deleteProfile;
+
+  // ============================================================
+  // EXPORT
+  // ============================================================
+  function exportCSV() {
+    if (allProfiles.length === 0) { alert('Nenhum perfil pra exportar.'); return; }
+    const headers = ['Nome', 'Email', 'Nivel', 'Motivacao', 'Vibe', 'Interesses', 'Horarios', 'Bio', 'Criado'];
+    const rows = allProfiles.map(p => [
+      p.name, p.email, p.level, p.motivation, p.vibe,
+      p.interests.join('|'), p.times.join('|'),
+      (p.bio || '').replace(/"/g, '""'),
+      new Date(p.createdAt).toLocaleString('pt-BR')
+    ]);
+    const csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+    downloadFile('companeros_perfis.csv', csv, 'text/csv;charset=utf-8;');
+  }
+  window.exportCSV = exportCSV;
+
+  function exportJSON() {
+    if (allProfiles.length === 0) { alert('Nenhum perfil pra exportar.'); return; }
+    downloadFile('companeros_perfis.json', JSON.stringify(allProfiles, null, 2), 'application/json');
+  }
+  window.exportJSON = exportJSON;
+
+  function downloadFile(name, content, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // GO
+  init();
+</script>
+</body>
+</html>
