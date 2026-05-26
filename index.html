@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Compañeros — Encontra teu companheiro de prática de espanhol. Comunidade exclusiva de alunos SpanishMentes." />
+<title>Compañeros — SpanishMentes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>" />
+<style>
+  /* =========================================================
+     1. DESIGN TOKENS (light)
+     ========================================================= */
+  :root {
+    --c-violet-700: #5B21B6; --c-violet-600: #6D28D9;
+    --c-violet-500: #7C3AED; --c-violet-400: #8B5CF6; --c-violet-300: #A78BFA;
+    --c-violet-100: #EDE9FE; --c-violet-50: #F5F3FF;
+    --c-pink-500: #EC4899; --c-pink-100: #FCE7F3;
+    --c-cyan-400: #22D3EE;
+    --c-amber-500: #F59E0B; --c-amber-100: #FEF3C7;
+    --c-ink-900: #0F0A1E; --c-ink-700: #2D2542; --c-ink-500: #5B5470;
+    --c-ink-300: #A8A2BC; --c-ink-100: #E9E5F2;
+    --c-white: #FFFFFF; --c-cream: #FAF8FF;
+
+    --grad-cta: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+    --grad-soft: linear-gradient(180deg, #FAF8FF 0%, #F5F3FF 100%);
+
+    --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --font-body: 'Manrope', system-ui, sans-serif;
+
+    --r-md: 0.875rem; --r-lg: 1.25rem; --r-xl: 1.75rem; --r-2xl: 2.5rem; --r-pill: 9999px;
+
+    --shadow-sm: 0 1px 2px rgba(15, 10, 30, 0.06);
+    --shadow-md: 0 4px 12px rgba(91, 33, 182, 0.08), 0 2px 4px rgba(15, 10, 30, 0.04);
+    --shadow-lg: 0 12px 32px rgba(91, 33, 182, 0.12), 0 4px 8px rgba(15, 10, 30, 0.06);
+    --shadow-xl: 0 24px 64px rgba(91, 33, 182, 0.18), 0 8px 16px rgba(15, 10, 30, 0.08);
+
+    --t-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --t-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --t-slow: 450ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Dark mode */
+  [data-theme="dark"] {
+    --c-white: #0B0716;
+    --c-cream: #110A24;
+    --c-ink-900: #F4F1FA;
+    --c-ink-700: #DCD5EC;
+    --c-ink-500: #9E97B6;
+    --c-ink-300: #6B6585;
+    --c-ink-100: #2C2348;
+    --c-violet-50: #1A1336;
+    --c-violet-100: #261B4A;
+    --grad-soft: linear-gradient(180deg, #0B0716 0%, #110A24 100%);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.35);
+    --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.65), 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  body, .site-header, .lang-switcher button, .card, .radio-card, .chip,
+  .field input, .field textarea, .site-footer, .footer-col a, .progress-step,
+  .step-icon, .nav-buttons .btn-ghost {
+    transition:
+      background-color var(--t-base),
+      color var(--t-base),
+      border-color var(--t-base);
+  }
+
+  [data-theme="dark"] .site-header {
+    background: rgba(11, 7, 22, 0.78);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+  [data-theme="dark"] .site-header.scrolled {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+  [data-theme="dark"] .lang-btn.active {
+    background: var(--c-violet-500); color: white;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+  }
+  [data-theme="dark"] .brand-pill { background: rgba(167, 139, 250, 0.15); color: var(--c-violet-300); }
+  [data-theme="dark"] .site-footer {
+    background: #050310;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  [data-theme="dark"] .footer-top { border-bottom-color: rgba(255, 255, 255, 0.08); }
+  [data-theme="dark"] .footer-brand .logo,
+  [data-theme="dark"] .footer-col h4 { color: white; }
+  [data-theme="dark"] .footer-col a,
+  [data-theme="dark"] .site-footer { color: rgba(255, 255, 255, 0.7); }
+
+  /* =========================================================
+     2. RESET & BASE
+     ========================================================= */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--c-ink-700);
+    background: var(--grad-soft);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  img, svg { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  h1, h2, h3, h4 { font-family: var(--font-display); color: var(--c-ink-900); letter-spacing: -0.02em; font-weight: 700; line-height: 1.2; }
+  ::selection { background: var(--c-violet-500); color: white; }
+
+  /* =========================================================
+     3. HEADER
+     ========================================================= */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    border-bottom: 1px solid transparent;
+  }
+  .site-header.scrolled {
+    border-bottom-color: var(--c-ink-100);
+    box-shadow: var(--shadow-sm);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.5rem; gap: 1.5rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-family: var(--font-display); font-weight: 800; font-size: 1.25rem;
+    color: var(--c-ink-900); letter-spacing: -0.02em;
+  }
+  .logo-mark {
+    width: 44px; height: 44px;
+    background: var(--grad-cta);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: white; font-size: 1.25rem;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+    overflow: hidden; flex-shrink: 0;
+  }
+  .logo-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .logo-mark.has-img { background: transparent; box-shadow: none; }
+  .logo-text { display: none; }
+  @media (min-width: 480px) { .logo-text { display: inline; } }
+
+  .lang-switcher {
+    display: flex; align-items: center; gap: 2px;
+    background: var(--c-violet-50);
+    border-radius: var(--r-pill); padding: 4px;
+  }
+  .lang-btn {
+    font-family: var(--font-body); font-size: 0.75rem;
+    font-weight: 600; letter-spacing: 0.04em;
+    color: var(--c-ink-500);
+    padding: 6px 10px; border-radius: var(--r-pill);
+    transition: all var(--t-fast); text-transform: uppercase;
+  }
+  .lang-btn.active {
+    background: var(--c-white); color: var(--c-violet-700);
+    box-shadow: 0 2px 6px rgba(91, 33, 182, 0.12);
+  }
+  .lang-btn:hover:not(.active) { color: var(--c-violet-600); }
+
+  /* =========================================================
+     4. MAIN LAYOUT
+     ========================================================= */
+  main { padding: 2rem 1.25rem 5rem; }
+  .app {
+    max-width: 720px; margin: 0 auto;
+  }
+
+  /* Brand header */
+  .brand {
+    text-align: center; margin-bottom: 2rem;
+  }
+  .brand-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--c-violet-100); color: var(--c-violet-600);
+    padding: 6px 14px; border-radius: var(--r-pill);
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .brand-pill .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--c-pink-500);
+  }
+  .brand h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+  }
+  .brand h1 .accent {
+    background: var(--grad-cta);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-style: italic;
+    display: inline-block;
+    padding: 0.05em 0.12em 0.1em;
+    margin: -0.05em -0.1em -0.1em;
+  }
+  .brand p {
+    color: var(--c-ink-500); margin-top: 0.75rem; max-width: 52ch;
+    margin-left: auto; margin-right: auto; font-size: 1rem;
+  }
+
+  /* =========================================================
+     5. CARD + FORM STEPS
+     ========================================================= */
+  .card {
+    background: var(--c-white);
+    border-radius: var(--r-xl);
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--c-ink-100);
+  }
+  @media (min-width: 600px) { .card { padding: 2.5rem; } }
+
+  .progress {
+    display: flex; gap: 6px; margin-bottom: 2rem;
+  }
+  .progress-step {
+    flex: 1; height: 6px; background: var(--c-ink-100);
+    border-radius: var(--r-pill); transition: background 300ms;
+  }
+  .progress-step.done { background: var(--grad-cta); }
+
+  .step { display: none; }
+  .step.active { display: block; animation: fadeIn 300ms ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .step h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .step .sub {
+    color: var(--c-ink-500); font-size: 0.9375rem; margin-bottom: 1.5rem;
+  }
+  .step-icon {
+    width: 56px; height: 56px; border-radius: var(--r-lg);
+    background: var(--grad-cta); color: white;
+    display: grid; place-items: center; margin-bottom: 1.25rem;
+    font-size: 1.75rem;
+  }
+
+  .field { margin-bottom: 1.25rem; }
+  .field label {
+    display: block; font-size: 0.875rem; font-weight: 600;
+    color: var(--c-ink-900); margin-bottom: 0.5rem;
+  }
+  .field .hint {
+    font-size: 0.8125rem; color: var(--c-ink-500); margin-top: 4px;
+  }
+  .field input[type="text"],
+  .field input[type="email"],
+  .field textarea {
+    width: 100%; padding: 12px 14px; border-radius: var(--r-md);
+    border: 1.5px solid var(--c-ink-100); background: var(--c-cream);
+    font: inherit; color: var(--c-ink-900);
+    transition: border-color 200ms, background 200ms;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none; border-color: var(--c-violet-500); background: var(--c-white);
+  }
+  .field textarea { resize: vertical; min-height: 100px; }
+
+  /* Chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 10px 16px; border-radius: var(--r-pill);
+    background: var(--c-cream); border: 1.5px solid var(--c-ink-100);
+    font-size: 0.875rem; font-weight: 500; color: var(--c-ink-700);
+    transition: all 200ms;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chip:hover { border-color: var(--c-violet-300); }
+  .chip.selected {
+    background: var(--grad-cta); color: white; border-color: transparent;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  }
+  .chip .check { display: none; }
+  .chip.selected .check { display: inline; }
+
+  /* Radio cards */
+  .radio-grid {
+    display: grid; grid-template-columns: 1fr; gap: 10px;
+  }
+  @media (min-width: 480px) {
+    .radio-grid.two-col { grid-template-columns: 1fr 1fr; }
+  }
+  .radio-card {
+    padding: 14px 16px; border-radius: var(--r-md);
+    background: var(--c-cream); border: 2px solid var(--c-ink-100);
+    text-align: left; transition: all 200ms;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .radio-card:hover { border-color: var(--c-violet-300); }
+  .radio-card.selected {
+    border-color: var(--c-violet-500); background: var(--c-violet-50);
+  }
+  .radio-card .emoji { font-size: 1.5rem; flex-shrink: 0; }
+  .radio-card .text { flex: 1; }
+  .radio-card .text strong {
+    display: block; color: var(--c-ink-900);
+    font-size: 0.9375rem; font-weight: 600;
+  }
+  .radio-card .text span {
+    display: block; font-size: 0.8125rem; color: var(--c-ink-500);
+    margin-top: 2px;
+  }
+
+  /* Buttons */
+  .nav-buttons {
+    display: flex; gap: 12px; margin-top: 2rem;
+  }
+  .btn {
+    padding: 14px 24px; border-radius: var(--r-pill);
+    font-weight: 600; font-size: 0.9375rem;
+    transition: all 200ms;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-primary {
+    background: var(--grad-cta); color: white;
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.28);
+    flex: 1;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(124, 58, 237, 0.36); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+  .btn-ghost {
+    background: transparent; color: var(--c-ink-700);
+    border: 1.5px solid var(--c-ink-100);
+  }
+  .btn-ghost:hover { border-color: var(--c-violet-300); color: var(--c-violet-600); }
+
+  /* Success */
+  .success { text-align: center; padding: 2rem 1rem; }
+  .success-emoji {
+    font-size: 4rem; margin-bottom: 1rem;
+    display: inline-block; animation: bounce 600ms ease;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-8px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(-4px); }
+  }
+  .success h2 { font-size: 1.75rem; margin-bottom: 0.75rem; }
+  .success p { color: var(--c-ink-500); margin-bottom: 1.5rem; }
+
+  /* =========================================================
+     6. FOOTER
+     ========================================================= */
+  .site-footer {
+    background: var(--c-ink-900);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 4rem 1.5rem 2rem;
+    margin-top: 4rem;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 1fr;
+    gap: 2.5rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  @media (min-width: 700px) { .footer-top { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+
+  .footer-brand .logo { color: white; margin-bottom: 1rem; font-size: 1.5rem; }
+  .footer-brand .logo-mark { width: 56px; height: 56px; }
+  .footer-brand p { font-size: 0.875rem; line-height: 1.55; max-width: 32ch; }
+
+  .footer-col h4 {
+    color: white; font-family: var(--font-display);
+    font-size: 0.875rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-col a {
+    font-size: 0.9375rem; color: rgba(255, 255, 255, 0.65);
+    transition: color var(--t-fast);
+  }
+  .footer-col a:hover { color: white; }
+
+  .footer-bottom {
+    display: flex; flex-direction: column; gap: 1rem;
+    align-items: center; justify-content: space-between;
+    padding-top: 2rem; text-align: center;
+  }
+  @media (min-width: 700px) {
+    .footer-bottom { flex-direction: row; text-align: left; }
+  }
+  .footer-bottom p { font-size: 0.8125rem; color: rgba(255, 255, 255, 0.5); }
+  .footer-tagline {
+    font-family: var(--font-display); font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .social-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .social-icon {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 10px 16px 10px 12px; border-radius: var(--r-pill);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.875rem; font-weight: 500;
+    transition: all var(--t-base);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .social-icon:hover {
+    background: var(--grad-cta); color: white;
+    transform: translateY(-2px); border-color: transparent;
+  }
+  .social-icon svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* =========================================================
+     7. FAB BUTTONS (WhatsApp + Theme)
+     ========================================================= */
+  .fab-wrap {
+    position: fixed; bottom: 1.5rem; z-index: 40;
+    display: flex; align-items: center;
+  }
+  .fab-wrap.fab-right { right: 1.5rem; flex-direction: row-reverse; gap: 0.75rem; }
+  .fab-wrap.fab-left { left: 1.5rem; flex-direction: row; gap: 0.75rem; }
+
+  .wa-float, .theme-toggle {
+    position: relative;
+  }
+  .wa-float {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366; color: white;
+    display: grid; place-items: center;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    transition: transform var(--t-base);
+  }
+  .wa-float:hover { transform: scale(1.08); }
+  .wa-float svg { width: 28px; height: 28px; }
+  .wa-float::before {
+    content: ''; position: absolute; inset: -3px;
+    border-radius: 50%; border: 2px solid #25D366;
+    opacity: 0.55;
+    animation: pulse-ring 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    pointer-events: none;
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.55; }
+    70% { transform: scale(1.18); opacity: 0; }
+    100% { transform: scale(1.18); opacity: 0; }
+  }
+
+  .theme-toggle {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--c-ink-900); color: var(--c-cream);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: grid; place-items: center; cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--t-base), background-color var(--t-base), color var(--t-base);
+  }
+  .theme-toggle:hover { transform: scale(1.08) rotate(-12deg); }
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--c-violet-400); outline-offset: 3px;
+  }
+  .theme-toggle svg { width: 22px; height: 22px; }
+  .theme-toggle .icon-sun { display: none; }
+  [data-theme="dark"] .theme-toggle { background: var(--c-cream); color: var(--c-ink-900); }
+  [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+  [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+  @media (max-width: 480px) {
+    .theme-toggle { width: 46px; height: 46px; }
+    .theme-toggle svg { width: 18px; height: 18px; }
+  }
+
+  .fab-tooltip {
+    background: var(--c-ink-900); color: var(--c-cream);
+    font-family: var(--font-body); font-size: 0.8125rem;
+    font-weight: 500; line-height: 1.35;
+    padding: 10px 14px; border-radius: var(--r-md);
+    max-width: 220px; box-shadow: var(--shadow-lg);
+    position: relative; opacity: 0; transform: scale(0.92);
+    pointer-events: none;
+    animation: fab-tooltip-pulse 16s ease-in-out infinite;
+  }
+  .fab-wrap.fab-left .fab-tooltip { animation-delay: 4s; transform-origin: left center; }
+  .fab-wrap.fab-right .fab-tooltip { animation-delay: 10s; transform-origin: right center; }
+  .fab-tooltip::after {
+    content: ''; position: absolute; top: 50%;
+    width: 8px; height: 8px; background: var(--c-ink-900);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .fab-wrap.fab-left .fab-tooltip::after { left: -3px; }
+  .fab-wrap.fab-right .fab-tooltip::after { right: -3px; }
+  .fab-wrap:hover .fab-tooltip,
+  .fab-wrap:focus-within .fab-tooltip {
+    animation-play-state: paused; opacity: 1; transform: scale(1);
+  }
+  @keyframes fab-tooltip-pulse {
+    0%, 100% { opacity: 0; transform: scale(0.92); }
+    4% { opacity: 1; transform: scale(1); }
+    22% { opacity: 1; transform: scale(1); }
+    28% { opacity: 0; transform: scale(0.92); }
+  }
+  [data-theme="dark"] .fab-tooltip {
+    background: var(--c-violet-100); color: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  }
+  [data-theme="dark"] .fab-tooltip::after { background: var(--c-violet-100); }
+  @media (max-width: 600px) { .fab-tooltip { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .fab-tooltip { animation: none; } }
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+<header class="site-header" id="siteHeader">
+  <nav class="nav" aria-label="Principal">
+    <a href="https://paulovpedroso.github.io/spanishmentes-test/" class="logo">
+      <span class="logo-mark has-img"><img src="https://drive.google.com/thumbnail?id=18jutZ0rg_BjsF0XgR45-8viW0uIaVfiU&sz=w400" alt="SpanishMentes" loading="lazy" onerror="this.parentElement.classList.remove('has-img');this.parentElement.textContent='💬';" /></span>
+      <span class="logo-text">SpanishMentes</span>
+    </a>
+
+    <div class="lang-switcher" role="group" aria-label="Selecionar idioma">
+      <button class="lang-btn active" data-lang="pt" aria-pressed="true">PT</button>
+      <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+    </div>
+  </nav>
+</header>
+
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+<main>
+  <div class="app">
+    <div class="brand">
+      <div class="brand-pill">
+        <span class="dot"></span>
+        <span data-i18n="brand_pill">Comunidade SpanishMentes</span>
+      </div>
+      <h1>
+        <span data-i18n="brand_title_pre">Encontre seu</span>
+        <span class="accent" data-i18n="brand_title_accent">compañero</span>
+        <span data-i18n="brand_title_post">de prática</span>
+      </h1>
+      <p data-i18n="brand_sub">Conte um pouco sobre você e te conectamos com outros alunos que compartilham seus interesses, horários e objetivos.</p>
+    </div>
+
+    <div class="card">
+      <div class="progress" id="progress"></div>
+
+      <!-- STEP 1: Identity -->
+      <div class="step active" data-step="0">
+        <div class="step-icon">👋</div>
+        <h2 data-i18n="step1_title">Vamos começar pelo básico</h2>
+        <p class="sub" data-i18n="step1_sub">Só Jenny e Javier vão ver seus dados. Nada é público sem sua permissão.</p>
+
+        <div class="field">
+          <label for="name" data-i18n="field_name_label">Como você quer ser chamado(a)?</label>
+          <input type="text" id="name" maxlength="40" data-i18n-placeholder="field_name_placeholder" placeholder="Ex: Maria, João, Mari..." />
+        </div>
+
+        <div class="field">
+          <label for="email" data-i18n="field_email_label">Seu email</label>
+          <input type="email" id="email" data-i18n-placeholder="field_email_placeholder" placeholder="seu@email.com" />
+          <div class="hint" data-i18n="field_email_hint">Para te avisarmos quando aparecer um match.</div>
+        </div>
+
+        <div class="field">
+          <label data-i18n="field_level_label">Seu nível de espanhol</label>
+          <div class="radio-grid">
+            <button type="button" class="radio-card" data-field="level" data-value="iniciante">
+              <span class="emoji">🌱</span>
+              <span class="text">
+                <strong data-i18n="level_beginner_title">Iniciante</strong>
+                <span data-i18n="level_beginner_desc">"Hola, ¿cómo estás?" — e pouco mais por enquanto</span>
+              </span>
+            </button>
+            <button type="button" class="radio-card" data-field="level" data-value="intermediario">
+              <span class="emoji">🌿</span>
+              <span class="text">
+                <strong data-i18n="level_intermediate_title">Intermediário</strong>
+                <span data-i18n="level_intermediate_desc">Consigo conversar com erros, entendo a maioria das coisas</span>
+              </span>
+            </button>
+            <button type="button" class="radio-card" data-field="level" data-value="avancado">
+              <span class="emoji">🌳</span>
+              <span class="text">
+                <strong data-i18n="level_advanced_title">Avançado</strong>
+                <span data-i18n="level_advanced_desc">Falo bem, quero refinar fluência e vocabulário</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Motivation -->
+      <div class="step" data-step="1">
+        <div class="step-icon">🎯</div>
+        <h2 data-i18n="step2_title">Por que você aprende espanhol?</h2>
+        <p class="sub" data-i18n="step2_sub">Escolha a motivação que mais te define hoje. Vamos te conectar com gente no mesmo caminho.</p>
+
+        <div class="field">
+          <div class="radio-grid two-col">
+            <button type="button" class="radio-card" data-field="motivation" data-value="trabalho">
+              <span class="emoji">💼</span>
+              <span class="text"><strong data-i18n="mot_work_title">Trabalho</strong><span data-i18n="mot_work_desc">Carreira, reuniões, oportunidades globais</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="viagem">
+              <span class="emoji">✈️</span>
+              <span class="text"><strong data-i18n="mot_travel_title">Viagem</strong><span data-i18n="mot_travel_desc">Espanha, América Latina, mochilão</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="imigracao">
+              <span class="emoji">🏠</span>
+              <span class="text"><strong data-i18n="mot_immig_title">Imigração</strong><span data-i18n="mot_immig_desc">Pretendo morar fora ou já moro</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="familia">
+              <span class="emoji">❤️</span>
+              <span class="text"><strong data-i18n="mot_family_title">Família/Relacionamento</strong><span data-i18n="mot_family_desc">Pessoas próximas falam espanhol</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="cultura">
+              <span class="emoji">🎬</span>
+              <span class="text"><strong data-i18n="mot_culture_title">Cultura</strong><span data-i18n="mot_culture_desc">Filmes, música, séries, literatura</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="motivation" data-value="academico">
+              <span class="emoji">🎓</span>
+              <span class="text"><strong data-i18n="mot_academic_title">Acadêmico</strong><span data-i18n="mot_academic_desc">Estudos, pesquisa, certificações</span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Interests -->
+      <div class="step" data-step="2">
+        <div class="step-icon">💬</div>
+        <h2 data-i18n="step3_title">Sobre o que você adora conversar?</h2>
+        <p class="sub" data-i18n="step3_sub">Escolha 3 a 6 temas. Quanto mais específico, melhor o match.</p>
+
+        <div class="field">
+          <div class="chips" id="interests-chips"></div>
+          <div class="hint" id="interests-counter">0 / 3-6</div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Vibe + Availability -->
+      <div class="step" data-step="3">
+        <div class="step-icon">⏰</div>
+        <h2 data-i18n="step4_title">Quando e como rola melhor?</h2>
+        <p class="sub" data-i18n="step4_sub">Horário compatível é metade do match. A outra metade é a vibe.</p>
+
+        <div class="field">
+          <label data-i18n="field_availability_label">Disponibilidade (escolha quantos quiser)</label>
+          <div class="chips" id="time-chips">
+            <button type="button" class="chip" data-time="manha-semana"><span data-i18n="time_morning_week">🌅 Manhãs de semana</span></button>
+            <button type="button" class="chip" data-time="tarde-semana"><span data-i18n="time_afternoon_week">☀️ Tardes de semana</span></button>
+            <button type="button" class="chip" data-time="noite-semana"><span data-i18n="time_evening_week">🌙 Noites de semana</span></button>
+            <button type="button" class="chip" data-time="manha-fim"><span data-i18n="time_morning_weekend">🌅 Manhãs no fim de semana</span></button>
+            <button type="button" class="chip" data-time="tarde-fim"><span data-i18n="time_afternoon_weekend">☀️ Tardes no fim de semana</span></button>
+            <button type="button" class="chip" data-time="noite-fim"><span data-i18n="time_evening_weekend">🌙 Noites no fim de semana</span></button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label data-i18n="field_vibe_label">Que tipo de encontro você quer?</label>
+          <div class="radio-grid">
+            <button type="button" class="radio-card" data-field="vibe" data-value="prática">
+              <span class="emoji">🎯</span>
+              <span class="text"><strong data-i18n="vibe_practice_title">Só prática mesmo</strong><span data-i18n="vibe_practice_desc">Quero treinar espanhol, sem precisar virar amizade</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="vibe" data-value="amizade">
+              <span class="emoji">🤝</span>
+              <span class="text"><strong data-i18n="vibe_friendship_title">Prática + amizade</strong><span data-i18n="vibe_friendship_desc">Quero conhecer gente legal e praticar junto</span></span>
+            </button>
+            <button type="button" class="radio-card" data-field="vibe" data-value="flexivel">
+              <span class="emoji">🌈</span>
+              <span class="text"><strong data-i18n="vibe_flexible_title">Tô de boa</strong><span data-i18n="vibe_flexible_desc">Depende da química, tô aberto(a)</span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: Bio -->
+      <div class="step" data-step="4">
+        <div class="step-icon">✍️</div>
+        <h2 data-i18n="step5_title">Te conta um pouco mais?</h2>
+        <p class="sub" data-i18n="step5_sub">Em 2-4 frases: quem você é, o que faz, e o que te empolga. Pode escrever em português mesmo.</p>
+
+        <div class="field">
+          <textarea id="bio" maxlength="400" data-i18n-placeholder="bio_placeholder" placeholder="Ex: Sou designer, moro em Floripa, viajo muito pela América do Sul. Adoro conversar sobre filmes, viagens e startups. Tô estudando espanhol pra mochilão na Patagônia ano que vem."></textarea>
+          <div class="hint"><span id="bio-counter">0</span>/400</div>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="step" data-step="5">
+        <div class="success">
+          <div class="success-emoji">🎉</div>
+          <h2><span data-i18n="success_title_pre">Pronto,</span> <span id="success-name">compañero</span>!</h2>
+          <p data-i18n="success_sub">Seu perfil foi salvo. Em até <strong>7 dias</strong>, Jenny ou Javier vão te mandar sugestões de match pelo WhatsApp com 3 icebreakers prontos pra você quebrar o gelo em espanhol.</p>
+          <button class="btn btn-primary" onclick="restartForm()" data-i18n="success_btn">Cadastrar outro perfil</button>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <div class="nav-buttons" id="nav-buttons">
+        <button class="btn btn-ghost" id="btn-back" style="display:none;" data-i18n="btn_back">← Voltar</button>
+        <button class="btn btn-primary" id="btn-next" disabled data-i18n="btn_next">Continuar →</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="https://paulovpedroso.github.io/spanishmentes-test/" class="logo">
+          <span class="logo-mark has-img"><img src="https://drive.google.com/thumbnail?id=18jutZ0rg_BjsF0XgR45-8viW0uIaVfiU&sz=w400" alt="SpanishMentes" loading="lazy" onerror="this.parentElement.classList.remove('has-img');this.parentElement.textContent='💬';" /></span>
+          <span>SpanishMentes</span>
+        </a>
+        <p data-i18n="footer_about">Aulas personalizadas de Espanhol e Inglês on-line, com professores nativos e horários flexíveis. Aprenda em qualquer lugar, a qualquer hora.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer_products">Cursos</h4>
+        <ul>
+          <li><a href="https://paulovpedroso.github.io/spanishmentes-test/#/espanol" data-i18n="nav_spanish">Aulas de Espanhol</a></li>
+          <li><a href="https://paulovpedroso.github.io/spanishmentes-test/#/ingles" data-i18n="nav_english">Aulas de Inglês</a></li>
+          <li><a href="https://paulovpedroso.github.io/spanishmentes-test/" data-i18n="nav_home">Início</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer_contact">Contato</h4>
+        <ul>
+          <li><a href="mailto:hola@spanishmentes.com">hola@spanishmentes.com</a></li>
+          <li><a href="#" data-wa-cta>+57 313 717 4700</a></li>
+          <li><span data-i18n="footer_hours">Segunda a Sexta · 7h-19h</span></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer_follow">Siga a gente</h4>
+        <div class="social-row">
+          <a href="https://www.instagram.com/spanishmentes/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram @spanishmentes">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.39A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.77.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13.67.67 1.34 1.08 2.13 1.39.76.3 1.63.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.39.67-.67 1.08-1.34 1.39-2.13.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.39-2.13A5.9 5.9 0 0 0 19.86.63C19.1.33 18.23.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+            <span>@spanishmentes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 SpanishMentes — <span data-i18n="footer_rights">Todos os direitos reservados.</span></p>
+      <p class="footer-tagline" data-i18n="footer_tagline">Learn Spanish & English from anywhere — at any time.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<div class="fab-wrap fab-right">
+  <a href="#" class="wa-float" data-wa-cta aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.79 14.18c-.24.68-1.42 1.31-1.97 1.36-.5.05-1.14.07-1.83-.12-.42-.13-.97-.31-1.66-.61-2.92-1.26-4.83-4.21-4.97-4.4-.15-.19-1.19-1.59-1.19-3.03 0-1.45.76-2.16 1.03-2.45.27-.29.59-.36.79-.36s.39 0 .56.01c.18.01.42-.07.66.5.24.59.83 2.04.9 2.18.07.15.12.32.02.51-.09.19-.14.31-.27.48-.13.17-.28.38-.4.51-.13.13-.27.28-.12.55.15.27.66 1.09 1.42 1.77.97.86 1.79 1.13 2.06 1.27.27.13.42.11.58-.07.16-.18.66-.78.84-1.04.18-.27.36-.22.61-.13.25.09 1.59.75 1.86.89.27.13.45.2.52.31.07.11.07.65-.17 1.34z"/></svg>
+  </a>
+  <span class="fab-tooltip" data-i18n="fab_wa_tooltip">Precisa de ajuda? Fala com a gente 💬</span>
+</div>
+
+<!-- Theme Toggle FAB -->
+<div class="fab-wrap fab-left">
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4.5"/>
+      <line x1="12" y1="2" x2="12" y2="4"/>
+      <line x1="12" y1="20" x2="12" y2="22"/>
+      <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
+      <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+      <line x1="2" y1="12" x2="4" y2="12"/>
+      <line x1="20" y1="12" x2="22" y2="12"/>
+      <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
+      <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+    </svg>
+  </button>
+  <span class="fab-tooltip" data-i18n="fab_theme_tooltip">Quer deixar o site escuro? 🌙</span>
+</div>
+
+<script>
+  // ============================================================
+  // CONFIG
+  // ============================================================
+  const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyufvoLdSYmb17VnZfv8_j4EO2LcU2ErSM_uxZK9mI2OZXzV-m7KChso80juyHQClLC/exec';
+  const WA_NUMBER = '573137174700';
+  const WA_MESSAGES = {
+    pt: 'Olá! Tô tentando me cadastrar no Compañeros e preciso de ajuda.',
+    en: 'Hi! I am trying to register on Compañeros and need some help.',
+    es: '¡Hola! Estoy intentando registrarme en Compañeros y necesito ayuda.'
+  };
+
+  // ============================================================
+  // i18n DICTIONARY
+  // ============================================================
+  const i18n = {
+    pt: {
+      brand_pill: 'Comunidade SpanishMentes',
+      brand_title_pre: 'Encontre seu',
+      brand_title_accent: 'compañero',
+      brand_title_post: 'de prática',
+      brand_sub: 'Conte um pouco sobre você e te conectamos com outros alunos que compartilham seus interesses, horários e objetivos.',
+      step1_title: 'Vamos começar pelo básico',
+      step1_sub: 'Só Jenny e Javier vão ver seus dados. Nada é público sem sua permissão.',
+      field_name_label: 'Como você quer ser chamado(a)?',
+      field_name_placeholder: 'Ex: Maria, João, Mari...',
+      field_email_label: 'Seu email',
+      field_email_placeholder: 'seu@email.com',
+      field_email_hint: 'Para te avisarmos quando aparecer um match.',
+      field_level_label: 'Seu nível de espanhol',
+      level_beginner_title: 'Iniciante',
+      level_beginner_desc: '"Hola, ¿cómo estás?" — e pouco mais por enquanto',
+      level_intermediate_title: 'Intermediário',
+      level_intermediate_desc: 'Consigo conversar com erros, entendo a maioria das coisas',
+      level_advanced_title: 'Avançado',
+      level_advanced_desc: 'Falo bem, quero refinar fluência e vocabulário',
+      step2_title: 'Por que você aprende espanhol?',
+      step2_sub: 'Escolha a motivação que mais te define hoje. Vamos te conectar com gente no mesmo caminho.',
+      mot_work_title: 'Trabalho', mot_work_desc: 'Carreira, reuniões, oportunidades globais',
+      mot_travel_title: 'Viagem', mot_travel_desc: 'Espanha, América Latina, mochilão',
+      mot_immig_title: 'Imigração', mot_immig_desc: 'Pretendo morar fora ou já moro',
+      mot_family_title: 'Família/Relacionamento', mot_family_desc: 'Pessoas próximas falam espanhol',
+      mot_culture_title: 'Cultura', mot_culture_desc: 'Filmes, música, séries, literatura',
+      mot_academic_title: 'Acadêmico', mot_academic_desc: 'Estudos, pesquisa, certificações',
+      step3_title: 'Sobre o que você adora conversar?',
+      step3_sub: 'Escolha 3 a 6 temas. Quanto mais específico, melhor o match.',
+      step3_counter: '{n} selecionados (mínimo 3, máximo 6)',
+      int_cinema: '🎬 Cinema & séries', int_music: '🎵 Música', int_books: '📚 Literatura & livros',
+      int_travel: '✈️ Viagens', int_food: '🍝 Gastronomia', int_sports: '⚽ Esportes',
+      int_tech: '💻 Tecnologia', int_business: '🚀 Empreendedorismo', int_news: '🗞️ Política & atualidades',
+      int_art: '🎨 Arte & design', int_science: '🔬 Ciência', int_spirit: '🧘 Espiritualidade',
+      int_nature: '🌿 Natureza & outdoors', int_fitness: '💪 Fitness & bem-estar',
+      int_games: '🎮 Games', int_photo: '📷 Fotografia',
+      step4_title: 'Quando e como rola melhor?',
+      step4_sub: 'Horário compatível é metade do match. A outra metade é a vibe.',
+      field_availability_label: 'Disponibilidade (escolha quantos quiser)',
+      time_morning_week: '🌅 Manhãs de semana', time_afternoon_week: '☀️ Tardes de semana',
+      time_evening_week: '🌙 Noites de semana', time_morning_weekend: '🌅 Manhãs no fim de semana',
+      time_afternoon_weekend: '☀️ Tardes no fim de semana', time_evening_weekend: '🌙 Noites no fim de semana',
+      field_vibe_label: 'Que tipo de encontro você quer?',
+      vibe_practice_title: 'Só prática mesmo', vibe_practice_desc: 'Quero treinar espanhol, sem precisar virar amizade',
+      vibe_friendship_title: 'Prática + amizade', vibe_friendship_desc: 'Quero conhecer gente legal e praticar junto',
+      vibe_flexible_title: 'Tô de boa', vibe_flexible_desc: 'Depende da química, tô aberto(a)',
+      step5_title: 'Te conta um pouco mais?',
+      step5_sub: 'Em 2-4 frases: quem você é, o que faz, e o que te empolga. Pode escrever em português mesmo.',
+      bio_placeholder: 'Ex: Sou designer, moro em Floripa, viajo muito pela América do Sul. Adoro conversar sobre filmes, viagens e startups. Tô estudando espanhol pra mochilão na Patagônia ano que vem.',
+      success_title_pre: 'Pronto,',
+      success_sub: 'Seu perfil foi salvo. Em até <strong>7 dias</strong>, Jenny ou Javier vão te mandar sugestões de match pelo WhatsApp com 3 icebreakers prontos pra você quebrar o gelo em espanhol.',
+      success_btn: 'Cadastrar outro perfil',
+      btn_back: '← Voltar', btn_next: 'Continuar →', btn_save: 'Salvar perfil ✓', btn_saving: 'Salvando...',
+      footer_about: 'Aulas personalizadas de Espanhol e Inglês on-line, com professores nativos e horários flexíveis. Aprenda em qualquer lugar, a qualquer hora.',
+      footer_products: 'Cursos', footer_contact: 'Contato', footer_follow: 'Siga a gente',
+      footer_hours: 'Segunda a Sexta · 7h-19h',
+      footer_rights: 'Todos os direitos reservados.',
+      footer_tagline: 'Learn Spanish & English from anywhere — at any time.',
+      nav_home: 'Início', nav_spanish: 'Aulas de Espanhol', nav_english: 'Aulas de Inglês',
+      fab_wa_tooltip: 'Precisa de ajuda? Fala com a gente 💬',
+      fab_theme_tooltip: 'Quer deixar o site escuro? 🌙'
+    },
+    en: {
+      brand_pill: 'SpanishMentes Community',
+      brand_title_pre: 'Find your',
+      brand_title_accent: 'compañero',
+      brand_title_post: 'for practice',
+      brand_sub: 'Tell us a bit about yourself and we will connect you with other students who share your interests, schedule and goals.',
+      step1_title: "Let's start with the basics",
+      step1_sub: 'Only Jenny and Javier will see your data. Nothing is public without your permission.',
+      field_name_label: 'How would you like to be called?',
+      field_name_placeholder: 'e.g. Maria, John, Mari...',
+      field_email_label: 'Your email',
+      field_email_placeholder: 'you@email.com',
+      field_email_hint: "To let you know when a match shows up.",
+      field_level_label: 'Your Spanish level',
+      level_beginner_title: 'Beginner',
+      level_beginner_desc: '"Hola, ¿cómo estás?" — and not much more yet',
+      level_intermediate_title: 'Intermediate',
+      level_intermediate_desc: 'I can talk with mistakes, I understand most things',
+      level_advanced_title: 'Advanced',
+      level_advanced_desc: 'I speak well, I want to refine fluency and vocabulary',
+      step2_title: 'Why are you learning Spanish?',
+      step2_sub: 'Pick the motivation that defines you most today. We will connect you with people on the same path.',
+      mot_work_title: 'Work', mot_work_desc: 'Career, meetings, global opportunities',
+      mot_travel_title: 'Travel', mot_travel_desc: 'Spain, Latin America, backpacking',
+      mot_immig_title: 'Immigration', mot_immig_desc: 'I plan to live abroad or already do',
+      mot_family_title: 'Family/Relationship', mot_family_desc: 'Close people speak Spanish',
+      mot_culture_title: 'Culture', mot_culture_desc: 'Movies, music, series, literature',
+      mot_academic_title: 'Academic', mot_academic_desc: 'Studies, research, certifications',
+      step3_title: 'What do you love to talk about?',
+      step3_sub: 'Pick 3 to 6 topics. The more specific, the better the match.',
+      step3_counter: '{n} selected (min 3, max 6)',
+      int_cinema: '🎬 Cinema & series', int_music: '🎵 Music', int_books: '📚 Literature & books',
+      int_travel: '✈️ Travel', int_food: '🍝 Food', int_sports: '⚽ Sports',
+      int_tech: '💻 Technology', int_business: '🚀 Entrepreneurship', int_news: '🗞️ Politics & news',
+      int_art: '🎨 Art & design', int_science: '🔬 Science', int_spirit: '🧘 Spirituality',
+      int_nature: '🌿 Nature & outdoors', int_fitness: '💪 Fitness & wellness',
+      int_games: '🎮 Games', int_photo: '📷 Photography',
+      step4_title: 'When and how does it work best?',
+      step4_sub: 'Compatible schedule is half the match. The other half is the vibe.',
+      field_availability_label: 'Availability (pick as many as you want)',
+      time_morning_week: '🌅 Weekday mornings', time_afternoon_week: '☀️ Weekday afternoons',
+      time_evening_week: '🌙 Weekday evenings', time_morning_weekend: '🌅 Weekend mornings',
+      time_afternoon_weekend: '☀️ Weekend afternoons', time_evening_weekend: '🌙 Weekend evenings',
+      field_vibe_label: 'What kind of meeting do you want?',
+      vibe_practice_title: 'Just practice', vibe_practice_desc: 'I want to train Spanish, no need to become friends',
+      vibe_friendship_title: 'Practice + friendship', vibe_friendship_desc: 'I want to meet cool people and practice together',
+      vibe_flexible_title: "I'm easy", vibe_flexible_desc: 'Depends on the chemistry, I am open',
+      step5_title: 'Tell us a bit more?',
+      step5_sub: "In 2-4 sentences: who you are, what you do, and what excites you. You can write in your own language.",
+      bio_placeholder: 'e.g. I am a designer based in Lisbon, I travel a lot in South America. I love talking about movies, travel and startups. Studying Spanish for a Patagonia trip next year.',
+      success_title_pre: 'All set,',
+      success_sub: 'Your profile is saved. Within <strong>7 days</strong>, Jenny or Javier will send match suggestions via WhatsApp with 3 ready icebreakers for you to break the ice in Spanish.',
+      success_btn: 'Register another profile',
+      btn_back: '← Back', btn_next: 'Continue →', btn_save: 'Save profile ✓', btn_saving: 'Saving...',
+      footer_about: 'Personalized Spanish and English online classes with native teachers and flexible schedules. Learn anywhere, anytime.',
+      footer_products: 'Courses', footer_contact: 'Contact', footer_follow: 'Follow us',
+      footer_hours: 'Monday to Friday · 7am-7pm',
+      footer_rights: 'All rights reserved.',
+      footer_tagline: 'Learn Spanish & English from anywhere — at any time.',
+      nav_home: 'Home', nav_spanish: 'Spanish Classes', nav_english: 'English Classes',
+      fab_wa_tooltip: 'Need help? Chat with us 💬',
+      fab_theme_tooltip: 'Switch to dark mode? 🌙'
+    },
+    es: {
+      brand_pill: 'Comunidad SpanishMentes',
+      brand_title_pre: 'Encuentra tu',
+      brand_title_accent: 'compañero',
+      brand_title_post: 'de práctica',
+      brand_sub: 'Cuéntanos un poco sobre ti y te conectamos con otros estudiantes que comparten tus intereses, horarios y objetivos.',
+      step1_title: 'Empecemos por lo básico',
+      step1_sub: 'Solo Jenny y Javier verán tus datos. Nada es público sin tu permiso.',
+      field_name_label: '¿Cómo quieres que te llamemos?',
+      field_name_placeholder: 'Ej: María, Juan, Mari...',
+      field_email_label: 'Tu email',
+      field_email_placeholder: 'tu@email.com',
+      field_email_hint: 'Para avisarte cuando aparezca un match.',
+      field_level_label: 'Tu nivel de español',
+      level_beginner_title: 'Principiante',
+      level_beginner_desc: '"Hola, ¿cómo estás?" — y poco más por ahora',
+      level_intermediate_title: 'Intermedio',
+      level_intermediate_desc: 'Logro conversar con errores, entiendo la mayoría',
+      level_advanced_title: 'Avanzado',
+      level_advanced_desc: 'Hablo bien, quiero refinar fluidez y vocabulario',
+      step2_title: '¿Por qué aprendes español?',
+      step2_sub: 'Elige la motivación que más te define hoy. Te conectamos con gente en el mismo camino.',
+      mot_work_title: 'Trabajo', mot_work_desc: 'Carrera, reuniones, oportunidades globales',
+      mot_travel_title: 'Viaje', mot_travel_desc: 'España, América Latina, mochilero',
+      mot_immig_title: 'Inmigración', mot_immig_desc: 'Pretendo vivir fuera o ya vivo',
+      mot_family_title: 'Familia/Relación', mot_family_desc: 'Personas cercanas hablan español',
+      mot_culture_title: 'Cultura', mot_culture_desc: 'Películas, música, series, literatura',
+      mot_academic_title: 'Académico', mot_academic_desc: 'Estudios, investigación, certificaciones',
+      step3_title: '¿De qué te encanta hablar?',
+      step3_sub: 'Elige 3 a 6 temas. Cuanto más específico, mejor el match.',
+      step3_counter: '{n} seleccionados (mínimo 3, máximo 6)',
+      int_cinema: '🎬 Cine & series', int_music: '🎵 Música', int_books: '📚 Literatura & libros',
+      int_travel: '✈️ Viajes', int_food: '🍝 Gastronomía', int_sports: '⚽ Deportes',
+      int_tech: '💻 Tecnología', int_business: '🚀 Emprendimiento', int_news: '🗞️ Política & actualidad',
+      int_art: '🎨 Arte & diseño', int_science: '🔬 Ciencia', int_spirit: '🧘 Espiritualidad',
+      int_nature: '🌿 Naturaleza & exterior', int_fitness: '💪 Fitness & bienestar',
+      int_games: '🎮 Videojuegos', int_photo: '📷 Fotografía',
+      step4_title: '¿Cuándo y cómo te queda mejor?',
+      step4_sub: 'Horario compatible es la mitad del match. La otra mitad es la vibra.',
+      field_availability_label: 'Disponibilidad (elige cuantos quieras)',
+      time_morning_week: '🌅 Mañanas entre semana', time_afternoon_week: '☀️ Tardes entre semana',
+      time_evening_week: '🌙 Noches entre semana', time_morning_weekend: '🌅 Mañanas del fin de semana',
+      time_afternoon_weekend: '☀️ Tardes del fin de semana', time_evening_weekend: '🌙 Noches del fin de semana',
+      field_vibe_label: '¿Qué tipo de encuentro quieres?',
+      vibe_practice_title: 'Solo práctica', vibe_practice_desc: 'Quiero practicar español, sin necesidad de hacer amistad',
+      vibe_friendship_title: 'Práctica + amistad', vibe_friendship_desc: 'Quiero conocer gente buena onda y practicar juntos',
+      vibe_flexible_title: 'Estoy tranquilo(a)', vibe_flexible_desc: 'Depende de la química, estoy abierto(a)',
+      step5_title: '¿Nos cuentas un poco más?',
+      step5_sub: 'En 2-4 frases: quién eres, qué haces y qué te entusiasma. Puedes escribir en tu idioma nativo.',
+      bio_placeholder: 'Ej: Soy diseñadora, vivo en Madrid, viajo mucho por Sudamérica. Me encanta hablar de películas, viajes y startups. Estudio español para una vuelta por la Patagonia el próximo año.',
+      success_title_pre: 'Listo,',
+      success_sub: 'Tu perfil se guardó. En hasta <strong>7 días</strong>, Jenny o Javier te enviarán sugerencias de match por WhatsApp con 3 rompehielos listos para romper el hielo en español.',
+      success_btn: 'Registrar otro perfil',
+      btn_back: '← Volver', btn_next: 'Continuar →', btn_save: 'Guardar perfil ✓', btn_saving: 'Guardando...',
+      footer_about: 'Clases personalizadas de Español e Inglés en línea, con profesores nativos y horarios flexibles. Aprende donde sea, cuando sea.',
+      footer_products: 'Cursos', footer_contact: 'Contacto', footer_follow: 'Síguenos',
+      footer_hours: 'Lunes a Viernes · 7h-19h',
+      footer_rights: 'Todos los derechos reservados.',
+      footer_tagline: 'Learn Spanish & English from anywhere — at any time.',
+      nav_home: 'Inicio', nav_spanish: 'Clases de Español', nav_english: 'Clases de Inglés',
+      fab_wa_tooltip: '¿Necesitas ayuda? Habla con nosotros 💬',
+      fab_theme_tooltip: '¿Cambiar a modo oscuro? 🌙'
+    }
+  };
+
+  // ============================================================
+  // INTERESTS catalog (i18n key + storage id)
+  // ============================================================
+  const INTERESTS = [
+    { id: 'cinema', key: 'int_cinema' },
+    { id: 'musica', key: 'int_music' },
+    { id: 'literatura', key: 'int_books' },
+    { id: 'viagens', key: 'int_travel' },
+    { id: 'gastronomia', key: 'int_food' },
+    { id: 'esportes', key: 'int_sports' },
+    { id: 'tecnologia', key: 'int_tech' },
+    { id: 'empreendedorismo', key: 'int_business' },
+    { id: 'politica', key: 'int_news' },
+    { id: 'arte', key: 'int_art' },
+    { id: 'ciencia', key: 'int_science' },
+    { id: 'espiritualidade', key: 'int_spirit' },
+    { id: 'natureza', key: 'int_nature' },
+    { id: 'fitness', key: 'int_fitness' },
+    { id: 'games', key: 'int_games' },
+    { id: 'fotografia', key: 'int_photo' }
+  ];
+
+  // ============================================================
+  // STATE
+  // ============================================================
+  const TOTAL_STEPS = 5;
+  let currentStep = 0;
+  let currentLang = 'pt';
+  let formData = {
+    name: '', email: '', level: '', motivation: '',
+    interests: [], times: [], vibe: '', bio: ''
+  };
+
+  // ============================================================
+  // I18N
+  // ============================================================
+  function applyLang(lang) {
+    if (!i18n[lang]) return;
+    currentLang = lang;
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : (lang === 'es' ? 'es-ES' : 'en-US');
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const val = i18n[lang][el.dataset.i18n];
+      if (val !== undefined) el.innerHTML = val;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const val = i18n[lang][el.dataset.i18nPlaceholder];
+      if (val !== undefined) el.placeholder = val;
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const isActive = btn.dataset.lang === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
+
+    renderInterests();
+    updateInterestsCounter();
+    updateNextButton();
+    updateWhatsAppLinks();
+
+    try { localStorage.setItem('companeros_lang', lang); } catch(e) {}
+  }
+
+  function updateWhatsAppLinks() {
+    const msg = encodeURIComponent(WA_MESSAGES[currentLang] || WA_MESSAGES.pt);
+    const href = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+    document.querySelectorAll('[data-wa-cta]').forEach(el => {
+      el.setAttribute('href', href);
+      el.setAttribute('target', '_blank');
+      el.setAttribute('rel', 'noopener noreferrer');
+    });
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  });
+
+  function initLang() {
+    let saved = null;
+    try { saved = localStorage.getItem('companeros_lang'); } catch(e) {}
+    if (saved && i18n[saved]) { applyLang(saved); return; }
+    const browser = (navigator.language || 'pt').toLowerCase().slice(0, 2);
+    applyLang(i18n[browser] ? browser : 'pt');
+  }
+
+  // ============================================================
+  // THEME
+  // ============================================================
+  (function initTheme() {
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+
+    function getInitial() {
+      try {
+        const saved = localStorage.getItem('companeros_theme');
+        if (saved === 'light' || saved === 'dark') return saved;
+      } catch (e) {}
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+      if (theme === 'dark') root.setAttribute('data-theme', 'dark');
+      else root.removeAttribute('data-theme');
+      toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    }
+
+    applyTheme(getInitial());
+
+    toggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem('companeros_theme', next); } catch (e) {}
+    });
+
+    if (window.matchMedia) {
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      const onMqChange = (e) => {
+        let saved = null;
+        try { saved = localStorage.getItem('companeros_theme'); } catch (err) {}
+        if (saved !== 'light' && saved !== 'dark') {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      };
+      if (mq.addEventListener) mq.addEventListener('change', onMqChange);
+      else if (mq.addListener) mq.addListener(onMqChange);
+    }
+  })();
+
+  // ============================================================
+  // HEADER SCROLL
+  // ============================================================
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ============================================================
+  // PROGRESS + STEPS
+  // ============================================================
+  function renderProgress() {
+    const wrap = document.getElementById('progress');
+    wrap.innerHTML = '';
+    for (let i = 0; i < TOTAL_STEPS; i++) {
+      const div = document.createElement('div');
+      div.className = 'progress-step' + (i <= currentStep ? ' done' : '');
+      wrap.appendChild(div);
+    }
+  }
+
+  function renderInterests() {
+    const wrap = document.getElementById('interests-chips');
+    wrap.innerHTML = '';
+    INTERESTS.forEach(int => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'chip' + (formData.interests.includes(int.id) ? ' selected' : '');
+      btn.dataset.interest = int.id;
+      const label = i18n[currentLang][int.key] || int.id;
+      btn.innerHTML = `<span>${label}</span><span class="check">✓</span>`;
+      btn.addEventListener('click', () => toggleInterest(int.id, btn));
+      wrap.appendChild(btn);
+    });
+  }
+
+  function toggleInterest(id, btn) {
+    const idx = formData.interests.indexOf(id);
+    if (idx > -1) {
+      formData.interests.splice(idx, 1);
+      btn.classList.remove('selected');
+    } else {
+      if (formData.interests.length >= 6) return;
+      formData.interests.push(id);
+      btn.classList.add('selected');
+    }
+    updateInterestsCounter();
+    updateNextButton();
+  }
+
+  function updateInterestsCounter() {
+    const tpl = i18n[currentLang].step3_counter || '{n} selected (min 3, max 6)';
+    document.getElementById('interests-counter').textContent =
+      tpl.replace('{n}', formData.interests.length);
+  }
+
+  // ============================================================
+  // FORM EVENTS
+  // ============================================================
+  document.getElementById('name').addEventListener('input', e => {
+    formData.name = e.target.value.trim(); updateNextButton();
+  });
+  document.getElementById('email').addEventListener('input', e => {
+    formData.email = e.target.value.trim(); updateNextButton();
+  });
+  document.getElementById('bio').addEventListener('input', e => {
+    formData.bio = e.target.value.trim();
+    document.getElementById('bio-counter').textContent = formData.bio.length;
+    updateNextButton();
+  });
+
+  document.querySelectorAll('.radio-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const field = card.dataset.field, value = card.dataset.value;
+      document.querySelectorAll(`.radio-card[data-field="${field}"]`).forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      formData[field] = value;
+      updateNextButton();
+    });
+  });
+
+  document.querySelectorAll('[data-time]').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const time = chip.dataset.time;
+      const idx = formData.times.indexOf(time);
+      if (idx > -1) { formData.times.splice(idx, 1); chip.classList.remove('selected'); }
+      else { formData.times.push(time); chip.classList.add('selected'); }
+      updateNextButton();
+    });
+  });
+
+  document.getElementById('btn-next').addEventListener('click', nextStep);
+  document.getElementById('btn-back').addEventListener('click', prevStep);
+
+  function updateNextButton() {
+    const btn = document.getElementById('btn-next');
+    let valid = false;
+    switch (currentStep) {
+      case 0: valid = formData.name.length >= 2 && /\S+@\S+\.\S+/.test(formData.email) && formData.level; break;
+      case 1: valid = !!formData.motivation; break;
+      case 2: valid = formData.interests.length >= 3; break;
+      case 3: valid = formData.times.length >= 1 && !!formData.vibe; break;
+      case 4: valid = formData.bio.length >= 20; break;
+    }
+    btn.disabled = !valid;
+    btn.textContent = currentStep === 4 ? i18n[currentLang].btn_save : i18n[currentLang].btn_next;
+  }
+
+  function nextStep() {
+    if (currentStep === 4) { saveProfile(); return; }
+    currentStep++;
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+    document.getElementById('btn-back').style.display = currentStep > 0 ? 'inline-flex' : 'none';
+    renderProgress();
+    updateNextButton();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function prevStep() {
+    if (currentStep === 0) return;
+    currentStep--;
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+    document.getElementById('btn-back').style.display = currentStep > 0 ? 'inline-flex' : 'none';
+    renderProgress();
+    updateNextButton();
+  }
+
+  async function saveProfile() {
+    const btn = document.getElementById('btn-next');
+    btn.disabled = true;
+    btn.textContent = i18n[currentLang].btn_saving;
+
+    const profile = {
+      ...formData,
+      lang: currentLang,
+      id: 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+      createdAt: new Date().toISOString()
+    };
+
+    try {
+      await fetch(SHEETS_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(profile)
+      });
+    } catch (err) {
+      console.warn('Erro ao enviar:', err);
+    }
+
+    // 'no-cors' returns opaque response, so we always show success
+    document.getElementById('success-name').textContent = formData.name.split(' ')[0];
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector('[data-step="5"]').classList.add('active');
+    document.getElementById('nav-buttons').style.display = 'none';
+  }
+
+  function restartForm() {
+    formData = { name: '', email: '', level: '', motivation: '', interests: [], times: [], vibe: '', bio: '' };
+    currentStep = 0;
+    document.querySelectorAll('.radio-card.selected, .chip.selected').forEach(el => el.classList.remove('selected'));
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('bio').value = '';
+    document.getElementById('bio-counter').textContent = '0';
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.querySelector('[data-step="0"]').classList.add('active');
+    document.getElementById('nav-buttons').style.display = 'flex';
+    document.getElementById('btn-back').style.display = 'none';
+    renderProgress();
+    updateInterestsCounter();
+    updateNextButton();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  window.restartForm = restartForm;
+
+  // ============================================================
+  // GO
+  // ============================================================
+  renderProgress();
+  initLang();
+</script>
+</body>
+</html>
